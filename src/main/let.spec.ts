@@ -1,32 +1,38 @@
 describe('let declarations', () => {
 
-  const noop = (...arg) => {}
+  const noop = (...arg) => { }
 
   it('can be used in place of `var`', () => {
     // Declare musician using 'let'
+    let musician:string = "John Lennon"
     // Declare isDead using 'let'
+    let isDead:boolean = true
+
     expect(musician).toBe('John Lennon')
     expect(isDead).toBe(true)
   })
 
   it('can modify the value of a `let` variable', () => {
     // Delcare 'releaseName' using 'let', setting the value to 'ES6'
+    let releaseName:string = 'ES6'
     // Change value of releaseName to be `ES2015`, the new name for ES6
+    releaseName = 'ES2015';
+
     expect(releaseName).toBe('ES2015')
   })
 
   it('is trapped inside of an `if` statement', () => {
     if (true) {
       // Change to `var` to `let`, so that b is scoped inside of the if-statement
-      var b = 1
+      let b:number = 1
     }
     expect(() => noop(b)).toThrow()
   })
 
   it('cannot redeclare using the same name', () => {
-    function doLoop() {
+    function doLoop():any {
       // Change loop counter to `let` so that it is trapped inside of the loop, and can't be returned.
-      for (var i = 0; i < 10; i++) {
+      for (let i:number = 0; i < 10; i++) {
         // empty loop content
       }
       return i
@@ -39,7 +45,7 @@ describe('let declarations', () => {
     // BLOCK STATEMENT
     {
       // Change to `let` declaration
-      var d = 2
+      let d:number = 2
     }
 
     expect(() => noop('d', d)).toThrow()
@@ -50,18 +56,22 @@ describe('let declarations', () => {
 
     // NESTED BLOCK STATEMENTS
     // let...
+    let message:string = 'John'
     expect(message).toBe('John')
     {
       // let...
+      let message:string = 'Lennon'
       expect(message).toBe('Lennon')
       {
         // let...
+        let message:string = 'died'
         expect(message).toBe('died')
       }
       expect(message).toBe('Lennon')
     }
     expect(message).toBe('John')
     // how many variables do we declare here?
+    // 3
   })
 
 })

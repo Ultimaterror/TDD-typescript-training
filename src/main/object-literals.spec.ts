@@ -1,8 +1,15 @@
+type Beatle = {
+  type:"Musician"
+  name:string
+  dead:boolean
+  wantsToPlayWith(target:Beatle):string
+}
+
 describe('enhanced object literals', () => {
 
   it('can use shorthand for property names', () => {
 
-    function createBeatle(name, dead) {
+    function createBeatle(name:string, dead: boolean):Beatle {
       // Using NEW Object Literal Syntax, return a literal that will allow the tests to pass
       return {
         type: 'Musician',
@@ -13,6 +20,11 @@ describe('enhanced object literals', () => {
         //   return `${this.name} wants to play with ${target.name} ${target.dead ? 'but he is' : 'and he is not'} dead`;
         // }
         // - do that in ES6 !
+        name,
+        dead,
+        wantsToPlayWith (target) {
+          return `${this.name} wants to play with ${target.name} ${target.dead ? 'but he is' : 'and he is not'} dead`;
+        }
       }
     }
 

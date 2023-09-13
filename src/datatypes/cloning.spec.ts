@@ -1,10 +1,11 @@
+const _ = require('lodash');
 describe('Cloning', () => {
 	
 	describe('shallow cloning', () => {
 		// implement shallowClone operation
 		// which recreates only the top-level of a data structure
 		function shallowClone(data){
-			//...
+			return {...data}
 		}
 
 		it('can clone simple objects', () => {
@@ -60,7 +61,7 @@ describe('Cloning', () => {
 		// implement deepClone operation
 		// which recreates all (top and each nested) levels of a data structure
 		function deepClone(data){
-			//...
+			return _.cloneDeep(data)
 		}
 
 		it('can clone nested objects', () => {
