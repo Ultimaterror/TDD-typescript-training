@@ -108,13 +108,8 @@ describe('Destructuring', () => {
 			// (!) you might copy/paste the function call for each number...
 			// but there is a better solution using destructuring!
 			const process = amount => Math.round(amount * 0.43 * 100)/100;
-      // For loop
-      for (const key in getData()) {
-        if (typeof getData()[key] === 'number') {
-          eval(key + ' = ' + process(getData()[key])) ;
-        }
-      }
-      // NOT RIGHT
+
+      let [balance, funds, incomes, payments] = Object.values(getData()).filter(elem => typeof elem === 'number').map(elem => process(elem))
 
 			expect(balance).toBe(84173.01)
 			expect(funds).toBe(37380.93)
