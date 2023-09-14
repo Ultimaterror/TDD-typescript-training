@@ -6,7 +6,7 @@ module.exports = {
     //"/src/fake.spec.ts",
     // "/src/main/",
     // "/src/datatypes/",
-    "/src/params/",
+    // "/src/params/",
     "/src/functions/",
     "/src/promises/",
   ],

@@ -18,10 +18,10 @@ describe('Destructuring', () => {
 
     it('can be used to pull apart objects', () => {
       // Using destructuring, call `getAddress()` and create a 'city', 'voivodeship' and 'zip' variable.
-      var address = getAddress();
-      // var city = address.city;
-      // var voivodeship = address.voivodeship;
-      // var zip = address.zip;
+      let {city, voivodeship, zip} = getAddress();
+      // let city = address.city;
+      // let voivodeship = address.voivodeship;
+      // let zip = address.zip;
       expect(city).toBe('Kazimierz Dolny')
       expect(voivodeship).toBe('lubelskie')
       expect(zip).toBe(24120)
@@ -29,6 +29,8 @@ describe('Destructuring', () => {
 
     it('can alias destructured variables', () => {
       // Using destructuring, call `getAddress()` and pull the city, voivodeship and zip out, and alias them to c, v, z, respectively
+      let {city: c, voivodeship: v, zip: z} = getAddress();
+
       expect(c).toBe('Kazimierz Dolny')
       expect(v).toBe('lubelskie')
       expect(z).toBe(24120)
@@ -39,6 +41,7 @@ describe('Destructuring', () => {
 
     it('can destructure nested variables', () => {
       // Using destructuring, call `getAddress()` and create an 'lat' and 'long' variables.
+      let {coords :{lat, long}} = getAddress();
       expect(lat).toBe(51.3180409)
       expect(long).toBe(21.9542483)
       // expect(() => noop(coords)).toThrow()
@@ -46,6 +49,7 @@ describe('Destructuring', () => {
 
     it('can destructure both top-level and nested variables', () => {
       // Using destructuring, call `getAddress()` and create a 'city', 'lat' and 'long' variables.
+      let {city, coords :{lat, long}} = getAddress();
       expect(city).toBe('Kazimierz Dolny')
       expect(lat).toBe(51.3180409)
       expect(long).toBe(21.9542483)
@@ -61,12 +65,15 @@ describe('Destructuring', () => {
 
     it('can be used to pull apart arrays', () => {
       // Call getNumbers and pull the first value out as `one` and the second as `two`
+      let [one, two] = getNumbers();
       expect(one).toBe(1)
       expect(two).toBe(2)
     })
 
     it('can skip indexes in arrays', () => {
       // Call getNumbers and pull the first value out as `one` and the third as `three`
+      let [one, , three] = getNumbers();
+
       expect(one).toBe(1)
       expect(three).toBe(3)
       // expect(() => noop(two)).toThrow()
@@ -74,6 +81,8 @@ describe('Destructuring', () => {
 
 		it('can reach nested arrays', () => {
 			// Call getNestedNumbers and pull the first value out as `one`, the 3 as `three` and 6 as `sixth`.
+      let [one, , three, , ,six] = getNumbers();
+
 			expect(one).toBe(1)
 			expect(three).toBe(3)
 			expect(six).toBe(6)
@@ -99,6 +108,13 @@ describe('Destructuring', () => {
 			// (!) you might copy/paste the function call for each number...
 			// but there is a better solution using destructuring!
 			const process = amount => Math.round(amount * 0.43 * 100)/100;
+      // For loop
+      for (const key in getData()) {
+        if (typeof getData()[key] === 'number') {
+          eval(key + ' = ' + process(getData()[key])) ;
+        }
+      }
+      // NOT RIGHT
 
 			expect(balance).toBe(84173.01)
 			expect(funds).toBe(37380.93)
