@@ -7,7 +7,7 @@ module.exports = {
     // "/src/main/",
     // "/src/datatypes/",
     // "/src/params/",
-    "/src/functions/",
+    // "/src/functions/",
     "/src/promises/",
   ],
   reporters: ["jest-spec-reporter"],

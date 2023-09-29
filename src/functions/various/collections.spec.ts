@@ -1,3 +1,6 @@
+import { db } from "../../../data/data"
+import { shoppingData, shoppingDataDictionary } from "../../../data/data-shopping"
+
 describe('Collection restructuring', () => {
 
     const employees = db.getEmployees();
@@ -14,6 +17,13 @@ describe('Collection restructuring', () => {
 		// all elements of the list have `id` property set
 
 		// define `array2dict` here
+		function array2dict(list:any[]) {
+			return list.reduce((acc, item) => {
+				const {id, ...others} = item
+				acc[id] = others
+				return acc
+			}, {})
+		}
 
 		let employeeDictionary = array2dict(employees);
 
@@ -33,6 +43,12 @@ describe('Collection restructuring', () => {
 		// all elements within the dictionary are available under `id` keys
 
 		// define `dict2array` here
+		function dict2array(dict:{}): [] {
+			return Object.keys(dict).reduce((acc, key) => {
+				acc.push({id : parseInt(key), ...dict[key]})
+				return acc
+			}, [])
+		}
 
 		let shoppingData = dict2array(shoppingDataDictionary);
 

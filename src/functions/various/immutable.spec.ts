@@ -1,5 +1,8 @@
+import { db } from "../../../data/data"
+import { shoppingData } from "../../../data/data-shopping"
+
 describe('Immutable ES6 operations', () => {
-    const employees = db.getEmployees();
+	const employees = db.getEmployees();
 
 	const john = {
 		firstname: "John",
@@ -19,6 +22,9 @@ describe('Immutable ES6 operations', () => {
 	it('merge two objects', () => {
 		// define `merge2objects` function here
 		// for 2 given parameters, the function returns an new merged object 
+		function merge2objects(a: {}, b: {}) {
+			return Object.assign(a, b)
+		}
 
 		expect(merge2objects(john, musician)).toEqual({
 			firstname: "John", lastname: "Lennon", profession: "musician", salary: 5000
@@ -32,6 +38,9 @@ describe('Immutable ES6 operations', () => {
 	it('merging multiple objects', () => {
 		// define `mergeManyObjects` function here
 		// same as above, but accepts multiple objects as input parameters 
+		function mergeManyObjects(...objects) {
+			return Object.assign({}, ...objects)
+		}
 
 		expect(mergeManyObjects({ id: 8492745921 }, john, musician)).toEqual({
 			id: 8492745921, firstname: "John", lastname: "Lennon", profession: "musician", salary: 5000
@@ -45,6 +54,14 @@ describe('Immutable ES6 operations', () => {
 	it('strip static attribute from objects', () => {
 		// define `stripId` function here
 		// it will return an immutable version of input object with `id` removed
+		function stripId(obj: {}) {
+			return Object.keys(obj).reduce((acc, key) => {
+				if (key !== "id") {
+					return { ...acc, [key]: obj[key] }
+				}
+				return acc
+			}, {})
+		}
 
 		// all following expectations check the same - `id` attr should have been removed
 		expect(stripId({
@@ -79,11 +96,21 @@ describe('Immutable ES6 operations', () => {
 		// and the object itself as the 2nd param
 
 		// OPTION 1: EASY, remove the attr, as long as the original one isn't affected
+		// function stripKey(property:string,obj: {}) {
+		// 	return Object.keys(obj).reduce((acc, key) => {
+		// 		if (key !== property) {
+		// 			return { ...acc, [key]: obj[key] }
+		// 		}
+		// 		return acc
+		// 	}, {})
+		// }
 
 		// OPTION 2: use ES6 destructuring (tricky and a little crazy one)
-		// hint: after replacing static attribute with a computed property ( attr ---> [attrExpr])
-		// JS would get a syntax error, for not treating {} as a literal, but code block
-		// therefore, you additionally have to surround entire line with parenthesis: (...)
+		// hint: computed property ( attr ---> [attrExpr])
+		function stripKey(property:string,obj) {
+			let {[property]: removed, ...others} = obj
+			return others
+		}
 
 		expect(stripKey('firstname', {
 			id: 8492745921, firstname: "John", lastname: "Lennon"

@@ -454,7 +454,7 @@
   resolved "https://registry.npmjs.org/@types/jasmine/-/jasmine-3.3.12.tgz"
   integrity sha512-lXvr2xFQEVQLkIhuGaR3GC1L9lMU1IxeWnAF/wNY5ZWpC4p9dgxkKkzMp7pntpAdv9pZSnYqgsBkCg32MXSZMg==
 
-"@types/jest@^24.0.11":
+"@types/jest@^24.9.1":
   version "24.9.1"
   resolved "https://registry.npmjs.org/@types/jest/-/jest-24.9.1.tgz"
   integrity sha512-Fb38HkXSVA4L8fGKEZ6le5bB8r6MRWlOCZbVuWZcmOMSCd2wCYOwN1ibj8daIoV9naq7aaOZjrLCoCMptKU/4Q==
@@ -465,6 +465,11 @@
   version "4.14.107"
   resolved "https://registry.npmjs.org/@types/lodash/-/lodash-4.14.107.tgz"
   integrity sha512-afvjfP2rl3yvtv2qrCRN23zIQcDinF+munMJCoHEw2BXF22QJogTlVfNPTACQ6ieDyA6VnyKT4WLuN/wK368ng==
+
+"@types/mocha@^10.0.2":
+  version "10.0.2"
+  resolved "https://registry.npmjs.org/@types/mocha/-/mocha-10.0.2.tgz"
+  integrity sha512-NaHL0+0lLNhX6d9rs+NSt97WH/gIlRHmszXbQ/8/MV/eVcFNdeJ/GYhrFuUc8K7WuPhRhTSdMkCp8VMzhUq85w==
 
 "@types/node@^11.11.4":
   version "11.15.54"
@@ -520,6 +525,11 @@ acorn@^6.0.1:
   version "6.4.2"
   resolved "https://registry.npmjs.org/acorn/-/acorn-6.4.2.tgz"
   integrity sha512-XtGIhXwF8YM8bJhGxG5kXgjkEuNGLTkoYqVE+KMR+aspr4KGYmKYg7yUe3KghyQ9yheNwLnjmzh/7+gfDBmHCQ==
+
+add-matchers@0.6.2:
+  version "0.6.2"
+  resolved "https://registry.npmjs.org/add-matchers/-/add-matchers-0.6.2.tgz"
+  integrity sha512-hVO2wodMei9RF00qe+506MoeJ/NEOdCMEkSJ12+fC3hx/5Z4zmhNiP92nJEF6XhmXokeB0hOtuQrjHCx2vmXrQ==
 
 ajv@^6.12.3:
   version "6.12.6"
@@ -2658,6 +2668,13 @@ jasmine-core@3.3.0:
   version "3.3.0"
   resolved "https://registry.npmjs.org/jasmine-core/-/jasmine-core-3.3.0.tgz"
   integrity sha512-3/xSmG/d35hf80BEN66Y6g9Ca5l/Isdeg/j6zvbTYlTzeKinzmaTM4p9am5kYqOmE05D7s1t8FGjzdSnbUbceA==
+
+jasmine-expect@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.npmjs.org/jasmine-expect/-/jasmine-expect-5.0.0.tgz"
+  integrity sha512-byn1zq0EQBA9UKs5A+H6gk5TRcanV+TqQMRxrjurGuqKkclaqgjw/vV6aT/jtf5tabXGonTH6VDZJ33Z1pxSxw==
+  dependencies:
+    add-matchers "0.6.2"
 
 jest-changed-files@^24.9.0:
   version "24.9.0"

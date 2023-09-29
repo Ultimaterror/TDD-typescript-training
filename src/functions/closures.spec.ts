@@ -8,6 +8,12 @@ describe('Closures', function(){
 
 		// define incrementer function here
 		// try to define function signature
+		function incrementer() {
+			let count = 0
+			return function addOne() {
+				return count = count + 1
+			}
+		}
 
 		var inc1 = incrementer();
 		expect(inc1()).toEqual(1);
@@ -30,6 +36,17 @@ describe('Closures', function(){
 
 		// define counter function here
 		// try to define function signature
+		function counter() {
+			let count = 0
+			return {
+				inc() {
+					return count = count + 1
+				},
+				dec() {
+					return count = count - 1
+				}
+			}
+		}
 
 		var c1 = counter();
 		expect(c1.inc()).toEqual(1);
@@ -51,6 +68,20 @@ describe('Closures', function(){
 
 		// define finanseStorage function here
 		// try to define function signature
+		function finanseStorage() {
+			let balance = 0
+			return {
+				getBalance() {
+					return balance
+				},
+				saveIncome(plus:number){
+					balance = Math.round((balance + plus) * 100) / 100
+				},
+				saveOutcome(minus:number){
+					balance = Math.round((balance - minus) * 100) / 100
+				}
+			}
+		}
 
 		var f1 = finanseStorage();
 		expect(f1.getBalance()).toEqual(0);

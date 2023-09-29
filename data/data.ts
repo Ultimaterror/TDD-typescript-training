@@ -26,7 +26,7 @@ interface Todo {
 
 type Transaction = any;
 
-const db = (function () {
+export const db = (function () {
 
 	const employees: Employee[] = [
 		{

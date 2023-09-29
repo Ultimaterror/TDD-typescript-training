@@ -1,11 +1,17 @@
+import { db } from "../../../data/data"
+import { shoppingData } from "../../../data/data-shopping"
+
 describe('Collection Random Access', () => {
 
 	it('can be used to pick random items', () => {
 		// write a closure which accepts a collection in the 1st step
 		// and, with no parameters, returns random item in the 2nd step
 		// like this: randomItemFrom([1,2,3])() 
-
-		randomItemOnceFrom// define `randomItemFrom` function here
+		
+		// define `randomItemFrom` function here
+		function randomItemFrom(array:any[]){
+			return function(){return array[Math.floor(Math.random()*array.length)]}
+		} 
 
 		const randomShoppingItem = randomItemFrom(shoppingData);
 		for (let i = 0; i < 50; i++) {
@@ -30,6 +36,13 @@ describe('Collection Random Access', () => {
 		// has been depleted (is empty and won't return any item from now on)
 
 		// define `randomItemOnceFrom` function here
+		function randomItemOnceFrom(array:any[]){
+			let newArray = [...array]
+			return function(){
+				return newArray.splice(Math.floor(Math.random()*newArray.length), 1)[0]
+			}
+			
+		} 
 
 		const randomShoppingItem = randomItemOnceFrom(shoppingData);
 		let count, item = randomShoppingItem();
@@ -43,10 +56,17 @@ describe('Collection Random Access', () => {
 		// same as above, but write it as an ES6 generator
 
 		// define `randomItemFromGenerator` _generator_ here
+		function *randomItemFromGenerator(array:any[]) {
+			let newArray = [...array]
+			for (; newArray.length > 0;) {
+				yield newArray.splice(Math.floor(Math.random()*newArray.length), 1)[0]			
+			}
+		}
 
 		const randomShoppingItemIterator = randomItemFromGenerator(shoppingData);
 		let count = 0;
 		for (let item of randomShoppingItemIterator){
+
 			count++;
 			expect(shoppingData.includes(item)).toBe(true);
 		}

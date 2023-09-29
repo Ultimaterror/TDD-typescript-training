@@ -23,7 +23,7 @@ describe('Reducers', () => {
 		// calculate total cost of above shopping cart
 		let totalPrice = data.reduce((total, item) => {
 			return total += item.qty * item.price;
-		});
+		}, 0);
 
 		expect(totalPrice).toEqual(159.45);
 	});
@@ -31,7 +31,10 @@ describe('Reducers', () => {
 	it('can split one big collection into smaller grouped collections', () => {
 		// group all items by type; each type should have its own sub-collection (array)
 		// the top-level should be a key-value structure
-		let groupedAggregate;
+		let groupedAggregate = data.reduce((res, item) => {
+			res[item.type].push(item)
+			return res;
+		}, { Clothes: [], Music: [], Food: [] });
 
 		expect(groupedAggregate.Clothes.length).toEqual(4);
 		expect(groupedAggregate.Music.length).toEqual(3);
@@ -43,7 +46,10 @@ describe('Reducers', () => {
 		// but instead of putting them in per-type arrays, we want to calculate
 		// the total price (item price times quantity) of all products that belong to a group
 		// the final result should state: for this group, the total price equals x
-		let priceAggregate;
+		let priceAggregate = data.reduce((res, item) => {
+			res[item.type] += item.price * item.qty
+			return res;
+		}, { Clothes: 0, Music: 0, Food: 0 });;
 
 		expect(priceAggregate.Clothes).toEqual(63.6);
 		expect(priceAggregate.Music).toEqual(30.75);
@@ -65,6 +71,9 @@ describe('Reducers', () => {
 		// 2. all predicates are truthy (all functions for this value return true) 
 
 		// function allTruthy(value, predicates)...
+		function allTruthy(value:number, predicates: Function[]) {
+			return predicates.reduce((res, callback)=> callback(value) ? res : res = false,true)
+		}
 
 		expect(allTruthy(0, [isEven, isLT1000])).toBe(true);
 		expect(allTruthy(25, [isOdd, isGT10, isNegative])).toBe(false);
@@ -82,22 +91,25 @@ describe('Reducers', () => {
 		// don't use FOR loops
 
 		// function execute...
+		function execute(ops:Function[], value:number) {
+			return ops.reduce((acc, callback)=>callback(acc),value)
+		}
 
 		var start = 2;
 		var operations = [
-			function(a){ return 8 * a - 10; },
-			function(a){ return (a - 3) * (a - 3) * (a - 3); },
-			function(a){ return a * a + 4; },
-			function(a){ return a % 5; }
+			function (a) { return 8 * a - 10; },
+			function (a) { return (a - 3) * (a - 3) * (a - 3); },
+			function (a) { return a * a + 4; },
+			function (a) { return a % 5; }
 		];
 		var result = execute(operations, start);
 		expect(result).toEqual(3);
 
 		var start = 5;
 		var operations = [
-			function(a){ return (a - 3) * (a - 3) * (a - 3); },
-			function(a){ return 8 * a - 10; },
-			function(a){ return a * a + 4; }
+			function (a) { return (a - 3) * (a - 3) * (a - 3); },
+			function (a) { return 8 * a - 10; },
+			function (a) { return a * a + 4; }
 		];
 		var result = execute(operations, start);
 		expect(result).toEqual(2920);

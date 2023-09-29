@@ -1,4 +1,4 @@
-var customMatchers = {
+export let customMatchers = {
 	toEqualJSON: function(util, customEqualityTesters) {
 		return {
 			compare: function(actual, expected) {

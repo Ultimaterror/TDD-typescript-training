@@ -9,7 +9,7 @@ interface ShoppingItemWithId extends ShoppingItem {
 	id: number;
 };
 
-const shoppingData: ShoppingItemWithId[] = [
+export const shoppingData: ShoppingItemWithId[] = [
 	{ type: 'Clothes', name: 'Socks', price: 1.00, qty: 5, id: 421801449988 },
 	{ type: 'Clothes', name: 'Trousers', price: 3.90, qty: 2, id: 346859289079 },
 	{ type: 'Clothes', name: 'Pajams', price: 4.80, qty: 1, id: 522050190541 },
@@ -26,7 +26,7 @@ type ShoppingItemsDictionary = {
 	[idx: number]: ShoppingItem;
 }
 
-const shoppingDataDictionary: ShoppingItemsDictionary = {
+export const shoppingDataDictionary: ShoppingItemsDictionary = {
 	421801449988:
 		{ type: 'Clothes', name: 'Socks', price: 1.00, qty: 5 },
 	346859289079:
